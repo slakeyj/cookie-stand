@@ -1,16 +1,37 @@
 'use strict';
+var hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm'];
 
-// var firstAndPike = {
-//   name: '1st and Pike',
-//   minCustomer: 23,  
-//   maxCustomer: 65,
-//   averageCookie: 6.3,
-//   randomCustomer: function (min, max) {
-//     return Math.round(Math.random() * (max - min + 1) + min);
-//   },
-//   dailySales: []
-// };
-// console.log(firstAndPike.randomCustomer(firstAndPike.minCustomer, firstAndPike.maxCustomer));
+var firstAndPike = {
+  name: '1st and Pike',
+  minCustomer: 23,
+  maxCustomer: 65,
+  averageCookie: 6.3,
+  randomCustomer: function () {
+    return Math.round(Math.random() * (this.maxCustomer - this.minCustomer + 1) + this.minCustomer);
+  },
+  dailySales: [],
+  hourlySalesAverage: function () {
+    for (var i = 0; i < hours.length; i++) {
+      var averageSales = this.randomCustomer() * Math.round(this.averageCookie);
+      this.dailySales.push(averageSales);
+      console.log(this.dailySales);
+    }
+  }
+};
+console.log(firstAndPike.hourlySalesAverage());
+
+// function hourlySalesAverage(minCust, maxCust, averageCust) {
+//   var dailySales = [];
+//   for (var i = 0; i < hours.length; i++) {
+//     var averageSales = randomCustomer(minCust, maxCust) * Math.round(averageCust);
+//     dailySales.push(averageSales);
+//     console.log(dailySales);
+//   }
+//   return dailySales;
+// }
+
+// console.log(hourlySalesAverage(23, 65, 6));
+
 
 
 
@@ -63,20 +84,6 @@ function randomCustomer(min, max) {
   return Math.round(Math.random() * (max - min + 1) + min);
 }
 
-var hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm']
 
-function hourlySalesAverage(minCust, maxCust, averageCust) {
-  var dailySales = [];
 
-  for (var i = 0; i < hours.length; i++) {
-    var averageSales = randomCustomer(minCust, maxCust) * Math.round(averageCust);
-    dailySales.push(averageSales);
-  }
-  return dailySales;
-}
 
-console.log(hourlySalesAverage(23, 65, 6));
-console.log(hourlySalesAverage(3, 24, 1.2));
-console.log(hourlySalesAverage(11, 38, 3.7));
-console.log(hourlySalesAverage(20, 38, 2.3));
-console.log(hourlySalesAverage(1, 16, 4.6));
