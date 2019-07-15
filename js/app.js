@@ -1,5 +1,14 @@
 'use strict';
+// array for hours of day
 var hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm'];
+
+// variable to get element by its id
+// var ulEl = document.getElementById('first-and-pike');
+// function render() {
+//   var liEl = document.createElement('li');
+//   liEl.textContent = this.hourlySalesAverage();
+//   ulEl.appendChild(liEl);
+// }
 
 var firstAndPike = {
   name: '1st and Pike',
@@ -10,28 +19,29 @@ var firstAndPike = {
     return Math.round(Math.random() * (this.maxCustomer - this.minCustomer + 1) + this.minCustomer);
   },
   dailySales: [],
+  newDailySales: [],
   hourlySalesAverage: function () {
     for (var i = 0; i < hours.length; i++) {
-      var averageSales = this.randomCustomer() * Math.round(this.averageCookie);
-      this.dailySales.push(averageSales);
-      console.log(this.dailySales);
+      var averageSales = this.randomCustomer() * this.averageCookie;
+      averageSales = Math.round(averageSales);
+      this.dailySales.push(Math.round(averageSales));
+
+      this.newDailySales.push(`${hours[i]}: ${this.dailySales[i]} cookies`);
+
+      console.log(`${hours[i]}: ${this.dailySales[i]} cookies`);
     }
+    return this.newDailySales;
+  },
+  render: function () {
+    var ulEl = document.getElementById('first-and-pike');
+    var liEl = document.createElement('li');
+    liEl.textContent = this.hourlySalesAverage();
+    console.log(liEl);
+    ulEl.appendChild(liEl);
   }
 };
-console.log(firstAndPike.hourlySalesAverage());
 
-// function hourlySalesAverage(minCust, maxCust, averageCust) {
-//   var dailySales = [];
-//   for (var i = 0; i < hours.length; i++) {
-//     var averageSales = randomCustomer(minCust, maxCust) * Math.round(averageCust);
-//     dailySales.push(averageSales);
-//     console.log(dailySales);
-//   }
-//   return dailySales;
-// }
-
-// console.log(hourlySalesAverage(23, 65, 6));
-
+firstAndPike.render();
 
 
 
@@ -77,12 +87,7 @@ console.log(firstAndPike.hourlySalesAverage());
 //     return Math.round(Math.random() * (max - min + 1) + min);
 //   },
 //   dailySales: []
-// };
-
-
-function randomCustomer(min, max) {
-  return Math.round(Math.random() * (max - min + 1) + min);
-}
+// };q
 
 
 
