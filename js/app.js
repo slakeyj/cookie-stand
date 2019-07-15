@@ -1,4 +1,5 @@
 'use strict';
+
 // array for hours of day
 var hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm'];
 
@@ -25,20 +26,25 @@ var firstAndPike = {
       var averageSales = this.randomCustomer() * this.averageCookie;
       averageSales = Math.round(averageSales);
       this.dailySales.push(Math.round(averageSales));
+      console.log(averageSales);
 
       this.newDailySales.push(`${hours[i]}: ${this.dailySales[i]} cookies`);
 
       console.log(`${hours[i]}: ${this.dailySales[i]} cookies`);
     }
-    return this.newDailySales;
+    console.log(`New Daily Sales final result is ${this.newDailySales}`);
+    console.log(this.newDailySales.length);
   },
   render: function () {
+    this.hourlySalesAverage();
     var ulEl = document.getElementById('first-and-pike');
-    var liEl = document.createElement('li');
-    liEl.textContent = this.hourlySalesAverage();
-    console.log(liEl);
-    ulEl.appendChild(liEl);
+    for (var j = 0; j < this.newDailySales.length; j++) {
+      var liEl = document.createElement('li');
+      liEl.textContent = this.newDailySales[j];
+      ulEl.appendChild(liEl);
+    }
   }
+  //after for loop append to dom
 };
 
 firstAndPike.render();
