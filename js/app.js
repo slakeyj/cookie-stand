@@ -2,6 +2,17 @@
 
 // array for hours of day
 var hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm'];
+// array containing all ul ids
+var idArray = ['first-and-pike', 'seatac', 'seattle-center', 'capitol-hill', 'alki'];
+// variable to store the main element
+var mainEl = document.getElementById('main');
+// for loop to create an unordered list item for each item in idArray
+for (var i = 0; i < idArray.length; i++) {
+  var ulEl = document.createElement('ul');
+  ulEl.setAttribute('id', idArray[i]);
+  mainEl.appendChild(ulEl);
+}
+
 
 // Renders list of averages for first and pike store
 var firstAndPike = {
@@ -73,7 +84,6 @@ var seatacAirport = {
   }
 };
 
-
 // renders list of averages for Seattle Center store
 var seattleCenter = {
   name: 'Seattle Center',
@@ -144,7 +154,6 @@ var capitolHill = {
   }
 };
 
-
 // renders list of averages for alki store
 var alki = {
   name: 'Alki',
@@ -179,7 +188,6 @@ var alki = {
     }
   }
 };
-
 
 firstAndPike.render();
 seatacAirport.render();
