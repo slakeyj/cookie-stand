@@ -12,24 +12,24 @@ var firstAndPike = {
   name: '1st and Pike',
   minCustomer: 23,
   maxCustomer: 65,
-  averageCookie: 6.3,
+  averageCookieSale: 6.3,
   getRandomCustomerCount: function () {
     return Math.round(Math.random() * (this.maxCustomer - this.minCustomer + 1) + this.minCustomer);
   },
   hourlySalesAverage: function () {
-    var cookieTotal = 0;
-    var averageArray = [];
+    var dailyCookieTotal = 0;
+    var totalCookiesList = [];
     for (var i = 0; i < hours.length; i++) {
-      var averageSales = this.getRandomCustomerCount() * this.averageCookie;
-      averageSales = Math.round(averageSales);
-      cookieTotal += averageSales;
-      console.log(`Average total is ${cookieTotal}`);
-      console.log(averageSales);
-      averageArray.push(`${hours[i]}: ${averageSales} cookies`);
+      var hourlyCustomerSales = this.getRandomCustomerCount() * this.averageCookieSale;
+      hourlyCustomerSales = Math.round(hourlyCustomerSales);
+      dailyCookieTotal += hourlyCustomerSales;
+      console.log(`Average total is ${dailyCookieTotal}`);
+      console.log(hourlyCustomerSales);
+      totalCookiesList.push(`${hours[i]}: ${hourlyCustomerSales} cookies`);
     }
-    averageArray.push(`Total: ${cookieTotal}`);
+    totalCookiesList.push(`Total: ${dailyCookieTotal}`);
     console.log(`New Daily Sales final result is ${this.averageArray}`);
-    return averageArray;
+    return totalCookiesList;
   },
   render: function () {
     const averageArray = this.hourlySalesAverage();
