@@ -13,6 +13,9 @@ function CreateStore(name, minimumCustomer, maximumCustomer, averageCookieSale) 
   this.minimumCustomer = minimumCustomer;
   this.maximumCustomer = maximumCustomer;
   this.averageCookieSale = averageCookieSale;
+  this.cookieTotal = 0;
+  this.averageArray = [];
+  this.totalsArray = [];
   storesCreated.push(this);
 }
 
@@ -28,21 +31,23 @@ CreateStore.prototype.getRandomCustomerCount = function () {
   return Math.round(Math.random() * (this.maximumCustomer - this.minimumCustomer + 1) + this.minimumCustomer);
 };
 
-CreateStore.prototype.getHourlySalesAndTotal = function () {
-  var cookieTotal = 0;
-  var averageArray = [];
+CreateStore.prototype.getHourlySales = function () {
+  this.averageArray = [];
   for (var i = 0; i < hours.length; i++) {
     var averageSales = this.getRandomCustomerCount() * this.averageCookieSale;
     averageSales = Math.round(averageSales);
-    cookieTotal += averageSales;
-    console.log(`Average total is ${cookieTotal}`);
+    this.cookieTotal += averageSales;
+    console.log(`Average total is ${this.cookieTotal}`);
     console.log(averageSales);
-    averageArray.push(`${hours[i]}: ${averageSales} cookies`);
+    this.averageArray.push(`${hours[i]}: ${averageSales} cookies`);
   }
-  averageArray.push(`Total: ${cookieTotal}`);
-  console.log(`New Daily Sales final result is ${this.averageArray}`);
-  return averageArray;
 };
+
+CreateStore.prototype.getTotal = function () {
+  this.totalsArray.push(`Total: ${this.cookieTotal}`);
+  console.log(`Total: ${this.cookieTotal}`);
+};
+
 
 new CreateStore('1st and Pike', 23, 65, 6.3);
 new CreateStore('SeaTac Airport', 3, 24, 1.2);
@@ -52,7 +57,11 @@ new CreateStore('Alki', 2, 16, 4.6);
 
 for (var i = 0; i < storesCreated.length; i++) {
   storesCreated[i].renderTitleRow();
+  storesCreated[i].getHourlySales();
+  storesCreated[i].getTotal();
 }
+
+
 
 
 
