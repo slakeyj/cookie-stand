@@ -6,41 +6,41 @@ var hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '
 // variable to store the main element
 var mainEl = document.getElementById('main');
 
-
 // Renders list of averages for first and pike store
 var firstAndPike = {
   name: '1st and Pike',
   minCustomer: 23,
   maxCustomer: 65,
-  averageCookieSale: 6.3,
+  averageCookie: 6.3,
+  //got this function from MDN - math.random() docs
   getRandomCustomerCount: function () {
     return Math.round(Math.random() * (this.maxCustomer - this.minCustomer + 1) + this.minCustomer);
   },
   hourlySalesAverage: function () {
-    var dailyCookieTotal = 0;
+    var cookieTotal = 0;
     var totalCookiesList = [];
     for (var i = 0; i < hours.length; i++) {
-      var hourlyCustomerSales = this.getRandomCustomerCount() * this.averageCookieSale;
-      hourlyCustomerSales = Math.round(hourlyCustomerSales);
-      dailyCookieTotal += hourlyCustomerSales;
-      console.log(`Average total is ${dailyCookieTotal}`);
-      console.log(hourlyCustomerSales);
-      totalCookiesList.push(`${hours[i]}: ${hourlyCustomerSales} cookies`);
+      var hourlyCustomerSale = this.getRandomCustomerCount() * this.averageCookie;
+      hourlyCustomerSale = Math.ceil(hourlyCustomerSale);
+      cookieTotal += hourlyCustomerSale;
+      console.log(`Average total is ${cookieTotal}`);
+      console.log(hourlyCustomerSale);
+      totalCookiesList.push(`${hours[i]}: ${hourlyCustomerSale} cookies`);
     }
-    totalCookiesList.push(`Total: ${dailyCookieTotal}`);
+    totalCookiesList.push(`Total: ${cookieTotal}`);
     console.log(`New Daily Sales final result is ${this.averageArray}`);
     return totalCookiesList;
   },
   render: function () {
-    const averageArray = this.hourlySalesAverage();
+    const totalCookieList = this.hourlySalesAverage();
     var titleElement = document.createElement('h2');
     titleElement.textContent = this.name;
     mainEl.appendChild(titleElement);
     var ulEl = document.createElement('ul');
     mainEl.appendChild(ulEl);
-    for (var j = 0; j < averageArray.length; j++) {
+    for (var j = 0; j < totalCookieList.length; j++) {
       var liEl = document.createElement('li');
-      liEl.textContent = averageArray[j];
+      liEl.textContent = totalCookieList[j];
       ulEl.appendChild(liEl);
     }
   }
