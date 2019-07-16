@@ -2,16 +2,9 @@
 
 // array for hours of day
 var hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm'];
-// array containing all ul ids
-var idArray = ['first-and-pike', 'seatac', 'seattle-center', 'capitol-hill', 'alki'];
+
 // variable to store the main element
 var mainEl = document.getElementById('main');
-// for loop to create an unordered list item for each item in idArray
-for (var i = 0; i < idArray.length; i++) {
-  var ulEl = document.createElement('ul');
-  ulEl.setAttribute('id', idArray[i]);
-  mainEl.appendChild(ulEl);
-}
 
 
 // Renders list of averages for first and pike store
@@ -20,30 +13,34 @@ var firstAndPike = {
   minCustomer: 23,
   maxCustomer: 65,
   averageCookie: 6.3,
-  randomCustomer: function () {
+  getRandomCustomerCount: function () {
     return Math.round(Math.random() * (this.maxCustomer - this.minCustomer + 1) + this.minCustomer);
   },
-  averageArray: [],
   hourlySalesAverage: function () {
-    var averageTotal = 0;
+    var cookieTotal = 0;
+    var averageArray = [];
     for (var i = 0; i < hours.length; i++) {
-      var averageSales = this.randomCustomer() * this.averageCookie;
+      var averageSales = this.getRandomCustomerCount() * this.averageCookie;
       averageSales = Math.round(averageSales);
-      averageTotal += averageSales;
-      console.log(`Average total is ${averageTotal}`);
+      cookieTotal += averageSales;
+      console.log(`Average total is ${cookieTotal}`);
       console.log(averageSales);
-      this.averageArray.push(`${hours[i]}: ${averageSales} cookies`);
+      averageArray.push(`${hours[i]}: ${averageSales} cookies`);
     }
-    this.averageArray.push(`Total: ${averageTotal}`);
-    this.averageArray.unshift(`${this.name}`);
+    averageArray.push(`Total: ${cookieTotal}`);
     console.log(`New Daily Sales final result is ${this.averageArray}`);
+    return averageArray;
   },
   render: function () {
-    this.hourlySalesAverage();
-    var ulEl = document.getElementById('first-and-pike');
-    for (var j = 0; j < this.averageArray.length; j++) {
+    const averageArray = this.hourlySalesAverage();
+    var titleElement = document.createElement('h2');
+    titleElement.textContent = this.name;
+    mainEl.appendChild(titleElement);
+    var ulEl = document.createElement('ul');
+    mainEl.appendChild(ulEl);
+    for (var j = 0; j < averageArray.length; j++) {
       var liEl = document.createElement('li');
-      liEl.textContent = this.averageArray[j];
+      liEl.textContent = averageArray[j];
       ulEl.appendChild(liEl);
     }
   }
@@ -55,30 +52,34 @@ var seatacAirport = {
   minCustomer: 3,
   maxCustomer: 24,
   averageCookie: 1.2,
-  randomCustomer: function () {
+  getRandomCustomerCount: function () {
     return Math.round(Math.random() * (this.maxCustomer - this.minCustomer + 1) + this.minCustomer);
   },
-  averageArray: [],
   hourlySalesAverage: function () {
-    var averageTotal = 0;
+    var cookieTotal = 0;
+    var averageArray = [];
     for (var i = 0; i < hours.length; i++) {
-      var averageSales = this.randomCustomer() * this.averageCookie;
+      var averageSales = this.getRandomCustomerCount() * this.averageCookie;
       averageSales = Math.round(averageSales);
-      averageTotal += averageSales;
-      console.log(`Average total is ${averageTotal}`);
+      cookieTotal += averageSales;
+      console.log(`Average total is ${cookieTotal}`);
       console.log(averageSales);
-      this.averageArray.push(`${hours[i]}: ${averageSales} cookies`);
+      averageArray.push(`${hours[i]}: ${averageSales} cookies`);
     }
-    this.averageArray.push(`Total: ${averageTotal}`);
-    this.averageArray.unshift(`${this.name}`);
+    averageArray.push(`Total: ${cookieTotal}`);
     console.log(`New Daily Sales final result is ${this.averageArray}`);
+    return averageArray;
   },
   render: function () {
-    this.hourlySalesAverage();
-    var ulEl = document.getElementById('seatac');
-    for (var j = 0; j < this.averageArray.length; j++) {
+    const averageArray = this.hourlySalesAverage();
+    var titleElement = document.createElement('h2');
+    titleElement.textContent = this.name;
+    mainEl.appendChild(titleElement);
+    var ulEl = document.createElement('ul');
+    mainEl.appendChild(ulEl);
+    for (var j = 0; j < averageArray.length; j++) {
       var liEl = document.createElement('li');
-      liEl.textContent = this.averageArray[j];
+      liEl.textContent = averageArray[j];
       ulEl.appendChild(liEl);
     }
   }
@@ -90,30 +91,34 @@ var seattleCenter = {
   minCustomer: 11,
   maxCustomer: 38,
   averageCookie: 3.7,
-  randomCustomer: function () {
+  getRandomCustomerCount: function () {
     return Math.round(Math.random() * (this.maxCustomer - this.minCustomer + 1) + this.minCustomer);
   },
-  averageArray: [],
   hourlySalesAverage: function () {
-    var averageTotal = 0;
+    var cookieTotal = 0;
+    var averageArray = [];
     for (var i = 0; i < hours.length; i++) {
-      var averageSales = this.randomCustomer() * this.averageCookie;
+      var averageSales = this.getRandomCustomerCount() * this.averageCookie;
       averageSales = Math.round(averageSales);
-      averageTotal += averageSales;
-      console.log(`Average total is ${averageTotal}`);
+      cookieTotal += averageSales;
+      console.log(`Average total is ${cookieTotal}`);
       console.log(averageSales);
-      this.averageArray.push(`${hours[i]}: ${averageSales} cookies`);
+      averageArray.push(`${hours[i]}: ${averageSales} cookies`);
     }
-    this.averageArray.push(`Total: ${averageTotal}`);
-    this.averageArray.unshift(`${this.name}`);
+    averageArray.push(`Total: ${cookieTotal}`);
     console.log(`New Daily Sales final result is ${this.averageArray}`);
+    return averageArray;
   },
   render: function () {
-    this.hourlySalesAverage();
-    var ulEl = document.getElementById('seattle-center');
-    for (var j = 0; j < this.averageArray.length; j++) {
+    const averageArray = this.hourlySalesAverage();
+    var titleElement = document.createElement('h2');
+    titleElement.textContent = this.name;
+    mainEl.appendChild(titleElement);
+    var ulEl = document.createElement('ul');
+    mainEl.appendChild(ulEl);
+    for (var j = 0; j < averageArray.length; j++) {
       var liEl = document.createElement('li');
-      liEl.textContent = this.averageArray[j];
+      liEl.textContent = averageArray[j];
       ulEl.appendChild(liEl);
     }
   }
@@ -125,30 +130,34 @@ var capitolHill = {
   minCustomer: 20,
   maxCustomer: 38,
   averageCookie: 2.3,
-  randomCustomer: function () {
+  getRandomCustomerCount: function () {
     return Math.round(Math.random() * (this.maxCustomer - this.minCustomer + 1) + this.minCustomer);
   },
-  averageArray: [],
   hourlySalesAverage: function () {
-    var averageTotal = 0;
+    var cookieTotal = 0;
+    var averageArray = [];
     for (var i = 0; i < hours.length; i++) {
-      var averageSales = this.randomCustomer() * this.averageCookie;
+      var averageSales = this.getRandomCustomerCount() * this.averageCookie;
       averageSales = Math.round(averageSales);
-      averageTotal += averageSales;
-      console.log(`Average total is ${averageTotal}`);
+      cookieTotal += averageSales;
+      console.log(`Average total is ${cookieTotal}`);
       console.log(averageSales);
-      this.averageArray.push(`${hours[i]}: ${averageSales} cookies`);
+      averageArray.push(`${hours[i]}: ${averageSales} cookies`);
     }
-    this.averageArray.push(`Total: ${averageTotal}`);
-    this.averageArray.unshift(`${this.name}`);
+    averageArray.push(`Total: ${cookieTotal}`);
     console.log(`New Daily Sales final result is ${this.averageArray}`);
+    return averageArray;
   },
   render: function () {
-    this.hourlySalesAverage();
-    var ulEl = document.getElementById('capitol-hill');
-    for (var j = 0; j < this.averageArray.length; j++) {
+    const averageArray = this.hourlySalesAverage();
+    var titleElement = document.createElement('h2');
+    titleElement.textContent = this.name;
+    mainEl.appendChild(titleElement);
+    var ulEl = document.createElement('ul');
+    mainEl.appendChild(ulEl);
+    for (var j = 0; j < averageArray.length; j++) {
       var liEl = document.createElement('li');
-      liEl.textContent = this.averageArray[j];
+      liEl.textContent = averageArray[j];
       ulEl.appendChild(liEl);
     }
   }
@@ -160,34 +169,39 @@ var alki = {
   minCustomer: 2,
   maxCustomer: 16,
   averageCookie: 4.6,
-  randomCustomer: function () {
+  getRandomCustomerCount: function () {
     return Math.round(Math.random() * (this.maxCustomer - this.minCustomer + 1) + this.minCustomer);
   },
-  averageArray: [],
   hourlySalesAverage: function () {
-    var averageTotal = 0;
+    var cookieTotal = 0;
+    var averageArray = [];
     for (var i = 0; i < hours.length; i++) {
-      var averageSales = this.randomCustomer() * this.averageCookie;
+      var averageSales = this.getRandomCustomerCount() * this.averageCookie;
       averageSales = Math.round(averageSales);
-      averageTotal += averageSales;
-      console.log(`Average total is ${averageTotal}`);
+      cookieTotal += averageSales;
+      console.log(`Average total is ${cookieTotal}`);
       console.log(averageSales);
-      this.averageArray.push(`${hours[i]}: ${averageSales} cookies`);
+      averageArray.push(`${hours[i]}: ${averageSales} cookies`);
     }
-    this.averageArray.push(`Total: ${averageTotal}`);
-    this.averageArray.unshift(`${this.name}`);
+    averageArray.push(`Total: ${cookieTotal}`);
     console.log(`New Daily Sales final result is ${this.averageArray}`);
+    return averageArray;
   },
   render: function () {
-    this.hourlySalesAverage();
-    var ulEl = document.getElementById('alki');
-    for (var j = 0; j < this.averageArray.length; j++) {
+    const averageArray = this.hourlySalesAverage();
+    var titleElement = document.createElement('h2');
+    titleElement.textContent = this.name;
+    mainEl.appendChild(titleElement);
+    var ulEl = document.createElement('ul');
+    mainEl.appendChild(ulEl);
+    for (var j = 0; j < averageArray.length; j++) {
       var liEl = document.createElement('li');
-      liEl.textContent = this.averageArray[j];
+      liEl.textContent = averageArray[j];
       ulEl.appendChild(liEl);
     }
   }
 };
+
 
 firstAndPike.render();
 seatacAirport.render();
