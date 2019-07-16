@@ -1,13 +1,28 @@
 'use strict';
 
+// variable to store the main element
+var tableEl = document.getElementById('table');
+
 // array for hours of day
 var hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm'];
+
+// array to store all stores created
+var storesCreated = [];
 function CreateStore(name, minimumCustomer, maximumCustomer, averageCookieSale) {
   this.name = name;
   this.minimumCustomer = minimumCustomer;
   this.maximumCustomer = maximumCustomer;
   this.averageCookieSale = averageCookieSale;
+  storesCreated.push(this);
 }
+
+CreateStore.prototype.renderTitleRow = function () {
+  var trEl = document.createElement('tr');
+  var thEl = document.createElement('td');
+  thEl.textContent = this.name;
+  trEl.appendChild(thEl);
+  tableEl.appendChild(trEl);
+};
 
 CreateStore.prototype.getRandomCustomerCount = function () {
   return Math.round(Math.random() * (this.maximumCustomer - this.minimumCustomer + 1) + this.minimumCustomer);
@@ -29,21 +44,22 @@ CreateStore.prototype.getHourlySalesAndTotal = function () {
   return averageArray;
 };
 
+new CreateStore('1st and Pike', 23, 65, 6.3);
+new CreateStore('SeaTac Airport', 3, 24, 1.2);
+new CreateStore('Seattle Center', 11, 38, 3.7);
+new CreateStore('Capitol Hill', 20, 38, 2.3);
+new CreateStore('Alki', 2, 16, 4.6);
 
-var firstPike = new CreateStore('1st and Pike', 23, 65, 6.3);
-console.log(firstPike);
-console.log(firstPike.getHourlySalesAndTotal());
-var seatac = new CreateStore('SeaTac Airport', 3, 24, 1.2);
-console.log(seatac);
-var seattleCenter = new CreateStore('Seattle Center', 11, 38, 3.7);
-console.log(seattleCenter);
-var capitolHill = new CreateStore('Capitol Hill', 20, 38, 2.3);
-console.log(capitolHill);
-var alki = new CreateStore('Alki', 2, 16, 4.6);
-console.log(alki);
+for (var i = 0; i < storesCreated.length; i++) {
+  storesCreated[i].renderTitleRow();
+}
 
-// variable to store the main element
-//var mainEl = document.getElementById('main');
+
+
+
+
+
+
 
 // Renders list of averages for first and pike store
 // var firstAndPike = {
