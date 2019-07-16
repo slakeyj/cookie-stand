@@ -14,37 +14,51 @@ function CreateStore(name, minimumCustomer, maximumCustomer, averageCookieSale) 
   this.maximumCustomer = maximumCustomer;
   this.averageCookieSale = averageCookieSale;
   this.cookieTotal = 0;
-  this.averageArray = [];
-  this.totalsArray = [];
+  this.hourlySalesList = [];
+  this.dailyTotal = [];
   storesCreated.push(this);
 }
 
 CreateStore.prototype.renderTitleRow = function () {
   var trEl = document.createElement('tr');
-  var thEl = document.createElement('td');
-  thEl.textContent = this.name;
-  trEl.appendChild(thEl);
+  var tdEl = document.createElement('td');
+  tdEl.textContent = this.name;
+  trEl.appendChild(tdEl);
   tableEl.appendChild(trEl);
 };
+
+function renderHourlyTotals() {
+  var trEl = document.createElement('tr');
+  var thEl = document.createElement('th');
+  thEl.textContent = '';
+  trEl.appendChild(thEl);
+  for (var i = 0; i < hours.length; i++) {
+    thEl = document.createElement('th');
+    thEl.textContent = hours[i];
+    trEl.appendChild(thEl);
+  }
+  tableEl.appendChild(trEl);
+}
 
 CreateStore.prototype.getRandomCustomerCount = function () {
   return Math.round(Math.random() * (this.maximumCustomer - this.minimumCustomer + 1) + this.minimumCustomer);
 };
 
 CreateStore.prototype.getHourlySales = function () {
-  this.averageArray = [];
+  this.hourlySalesList = [];
   for (var i = 0; i < hours.length; i++) {
-    var averageSales = this.getRandomCustomerCount() * this.averageCookieSale;
-    averageSales = Math.round(averageSales);
-    this.cookieTotal += averageSales;
+    var hourlyCookieSales = this.getRandomCustomerCount() * this.averageCookieSale;
+    hourlyCookieSales = Math.round(hourlyCookieSales);
+    this.cookieTotal += hourlyCookieSales;
     console.log(`Average total is ${this.cookieTotal}`);
-    console.log(averageSales);
-    this.averageArray.push(`${hours[i]}: ${averageSales} cookies`);
+    console.log(hourlyCookieSales);
+    this.hourlySalesList.push(`${hours[i]}: ${hourlyCookieSales} cookies`);
   }
 };
 
+// Outputs the total of all hourly sales
 CreateStore.prototype.getTotal = function () {
-  this.totalsArray.push(`Total: ${this.cookieTotal}`);
+  this.dailyTotal.push(`Total: ${this.cookieTotal}`);
   console.log(`Total: ${this.cookieTotal}`);
 };
 
@@ -55,18 +69,12 @@ new CreateStore('Seattle Center', 11, 38, 3.7);
 new CreateStore('Capitol Hill', 20, 38, 2.3);
 new CreateStore('Alki', 2, 16, 4.6);
 
+renderHourlyTotals();
 for (var i = 0; i < storesCreated.length; i++) {
   storesCreated[i].renderTitleRow();
   storesCreated[i].getHourlySales();
   storesCreated[i].getTotal();
 }
-
-
-
-
-
-
-
 
 
 
