@@ -22,6 +22,10 @@ header img {
   display: block;
 }
 
+fieldset {
+  border: 1px solid black;
+}
+
 table {
   width: 75%;
   margin-left: auto;

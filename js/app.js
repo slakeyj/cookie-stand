@@ -2,6 +2,7 @@
 
 // variable to store the table element
 var tableEl = document.getElementById('table');
+var formElement = document.getElementById('storeform');
 
 // array for hours of day
 var hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
@@ -30,11 +31,24 @@ CreateStore.prototype.calculateHourlySales = function () {
     var hourlyCookieSales = Math.ceil(this.getRandomCustomerCount() * this.averageCookieSale);
     hourlyCookieSales = Math.round(hourlyCookieSales);
     this.cookieTotal += hourlyCookieSales;
-    console.log(`Average total is ${this.cookieTotal}`);
-    console.log(hourlyCookieSales);
+    // console.log(`Average total is ${this.cookieTotal}`);
+    // console.log(hourlyCookieSales);
     this.hourlySalesList.push(hourlyCookieSales);
   }
 };
+
+function handleSubmit(event) {
+  event.preventDefault();
+  console.log('the event.target.storename.value is ', event.target.storename.value);
+  var storeNameInput = event.target.storename.value;
+  var minCustomerInput = event.target.mincustomer.value;
+  var maxCustomerInput = event.target.maxcustomer.value;
+  var averageCookieSaleInput = event.target.averagecookies.value;
+  console.log('The store name input is ' + storeNameInput);
+  console.log('The minimum customer input is ' + minCustomerInput);
+  console.log('The maximum customer input is ' + maxCustomerInput);
+  console.log('The average cookies sales input is ' + averageCookieSaleInput);
+}
 
 // renders the hours list to the table header
 function renderHours() {
@@ -91,8 +105,14 @@ storesCreated.push(new CreateStore('Seattle Center', 11, 38, 3.7));
 storesCreated.push(new CreateStore('Capitol Hill', 20, 38, 2.3));
 storesCreated.push(new CreateStore('Alki', 2, 16, 4.6));
 
+
+
 renderHours();
 for (var i = 0; i < storesCreated.length; i++) {
   storesCreated[i].render();
 }
 renderFooter();
+
+formElement.addEventListener('submit', handleSubmit);
+
+

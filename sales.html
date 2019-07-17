@@ -13,25 +13,28 @@
     <img src="salmon.png" alt="painting of a salmon" title="salmon" />
   </header>
   <main id="main">
-    <fieldset>
-      <label class="make-block">Please Input Store Information</label>
-      <div class="make-block">
-        <label>Store Name</label>
-        <input class=name="username" type="text" />
-      </div>
-      <div class="make-block">
-        <label>Minimum Customers/Hour</label>
-        <input name="mincustomer" type="text" />
-      </div>
-      <div class="make-block">
-        <label>Maximum Customers/Hour</label>
-        <input name="mincustomer" type="text" />
-      </div>
-      <div class="make-block">
-        <label>Minimum Customers/Hour</label>
-        <input name="mincustomer" type="text" />
-      </div>
-    </fieldset>
+    <form id="storeform">
+      <fieldsets>
+        <label class="make-block">Please Input Store Information</label>
+        <div class="make-block">
+          <label>Store Name</label>
+          <input name="storename" type="text" />
+        </div>
+        <div class="make-block">
+          <label>Minimum Customers/Hour</label>
+          <input name="mincustomer" type="text" />
+        </div>
+        <div class="make-block">
+          <label>Maximum Customers/Hour</label>
+          <input name="maxcustomer" type="text" />
+        </div>
+        <div class="make-block">
+          <label>Average Cookies Purchased/Customer</label>
+          <input name="averagecookies" type="text" />
+        </div>
+        <input type="submit" name="submitform" value="Submit" />
+        </fieldset>
+    </form>
     <table>
       <tbody id="table"></tbody>
     </table>
