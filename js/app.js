@@ -19,7 +19,6 @@ function CreateStore(name, minimumCustomer, maximumCustomer, averageCookieSale) 
   this.dailyTotal = [];
 }
 
-
 function renderHours() {
   var thElEmpty = document.createElement('th');
   var trEl = document.createElement('tr');
@@ -94,5 +93,4 @@ renderHours();
 for (var i = 0; i < storesCreated.length; i++) {
   storesCreated[i].render();
 }
-
 renderFooter();
