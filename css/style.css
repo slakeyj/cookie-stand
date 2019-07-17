@@ -1,3 +1,11 @@
 ul li{
   list-style-type: circle;
 }
+
+table {
+  width: 100%;
+}
+
+th {
+  text-align: left;
+}

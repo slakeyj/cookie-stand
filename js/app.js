@@ -1,211 +1,98 @@
 'use strict';
 
-// array for hours of day
-var hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm'];
-
 // variable to store the main element
-var mainEl = document.getElementById('main');
+var tableEl = document.getElementById('table');
 
-// Renders list of averages for first and pike store
-var firstAndPike = {
-  name: '1st and Pike',
-  minCustomer: 23,
-  maxCustomer: 65,
-  averageCookie: 6.3,
-  //got this function from MDN - math.random() docs
-  getRandomCustomerCount: function () {
-    return Math.round(Math.random() * (this.maxCustomer - this.minCustomer + 1) + this.minCustomer);
-  },
-  hourlySalesAverage: function () {
-    var cookieTotal = 0;
-    var totalCookiesList = [];
-    for (var i = 0; i < hours.length; i++) {
-      var hourlyCustomerSale = this.getRandomCustomerCount() * this.averageCookie;
-      hourlyCustomerSale = Math.ceil(hourlyCustomerSale);
-      cookieTotal += hourlyCustomerSale;
-      console.log(`Average total is ${cookieTotal}`);
-      console.log(hourlyCustomerSale);
-      totalCookiesList.push(`${hours[i]}: ${hourlyCustomerSale} cookies`);
-    }
-    totalCookiesList.push(`Total: ${cookieTotal}`);
-    console.log(`New Daily Sales final result is ${this.averageArray}`);
-    return totalCookiesList;
-  },
-  render: function () {
-    const totalCookieList = this.hourlySalesAverage();
-    var titleElement = document.createElement('h2');
-    titleElement.textContent = this.name;
-    mainEl.appendChild(titleElement);
-    var ulEl = document.createElement('ul');
-    mainEl.appendChild(ulEl);
-    for (var j = 0; j < totalCookieList.length; j++) {
-      var liEl = document.createElement('li');
-      liEl.textContent = totalCookieList[j];
-      ulEl.appendChild(liEl);
-    }
-  }
-};
+// array for hours of day
+var hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
 
-// Renders list of averages for SeaTac Airport store
-var seatacAirport = {
-  name: 'SeaTac Airport',
-  minCustomer: 3,
-  maxCustomer: 24,
-  averageCookie: 1.2,
-  getRandomCustomerCount: function () {
-    return Math.round(Math.random() * (this.maxCustomer - this.minCustomer + 1) + this.minCustomer);
-  },
-  hourlySalesAverage: function () {
-    var cookieTotal = 0;
-    var averageArray = [];
-    for (var i = 0; i < hours.length; i++) {
-      var averageSales = this.getRandomCustomerCount() * this.averageCookie;
-      averageSales = Math.round(averageSales);
-      cookieTotal += averageSales;
-      console.log(`Average total is ${cookieTotal}`);
-      console.log(averageSales);
-      averageArray.push(`${hours[i]}: ${averageSales} cookies`);
-    }
-    averageArray.push(`Total: ${cookieTotal}`);
-    console.log(`New Daily Sales final result is ${this.averageArray}`);
-    return averageArray;
-  },
-  render: function () {
-    const averageArray = this.hourlySalesAverage();
-    var titleElement = document.createElement('h2');
-    titleElement.textContent = this.name;
-    mainEl.appendChild(titleElement);
-    var ulEl = document.createElement('ul');
-    mainEl.appendChild(ulEl);
-    for (var j = 0; j < averageArray.length; j++) {
-      var liEl = document.createElement('li');
-      liEl.textContent = averageArray[j];
-      ulEl.appendChild(liEl);
-    }
-  }
-};
+// array to store all stores created
+var storesCreated = [];
 
-// renders list of averages for Seattle Center store
-var seattleCenter = {
-  name: 'Seattle Center',
-  minCustomer: 11,
-  maxCustomer: 38,
-  averageCookie: 3.7,
-  getRandomCustomerCount: function () {
-    return Math.round(Math.random() * (this.maxCustomer - this.minCustomer + 1) + this.minCustomer);
-  },
-  hourlySalesAverage: function () {
-    var cookieTotal = 0;
-    var averageArray = [];
-    for (var i = 0; i < hours.length; i++) {
-      var averageSales = this.getRandomCustomerCount() * this.averageCookie;
-      averageSales = Math.round(averageSales);
-      cookieTotal += averageSales;
-      console.log(`Average total is ${cookieTotal}`);
-      console.log(averageSales);
-      averageArray.push(`${hours[i]}: ${averageSales} cookies`);
-    }
-    averageArray.push(`Total: ${cookieTotal}`);
-    console.log(`New Daily Sales final result is ${this.averageArray}`);
-    return averageArray;
-  },
-  render: function () {
-    const averageArray = this.hourlySalesAverage();
-    var titleElement = document.createElement('h2');
-    titleElement.textContent = this.name;
-    mainEl.appendChild(titleElement);
-    var ulEl = document.createElement('ul');
-    mainEl.appendChild(ulEl);
-    for (var j = 0; j < averageArray.length; j++) {
-      var liEl = document.createElement('li');
-      liEl.textContent = averageArray[j];
-      ulEl.appendChild(liEl);
-    }
-  }
-};
+function CreateStore(name, minimumCustomer, maximumCustomer, averageCookieSale) {
+  this.name = name;
+  this.minimumCustomer = minimumCustomer;
+  this.maximumCustomer = maximumCustomer;
+  this.averageCookieSale = averageCookieSale;
+  this.cookieTotal = 0;
+  this.hourlySalesList = [];
+  this.dailyTotal = [];
+}
 
-// renders list of averages for Capitol Hill Store
-var capitolHill = {
-  name: 'Capitol Hill',
-  minCustomer: 20,
-  maxCustomer: 38,
-  averageCookie: 2.3,
-  getRandomCustomerCount: function () {
-    return Math.round(Math.random() * (this.maxCustomer - this.minCustomer + 1) + this.minCustomer);
-  },
-  hourlySalesAverage: function () {
-    var cookieTotal = 0;
-    var averageArray = [];
-    for (var i = 0; i < hours.length; i++) {
-      var averageSales = this.getRandomCustomerCount() * this.averageCookie;
-      averageSales = Math.round(averageSales);
-      cookieTotal += averageSales;
-      console.log(`Average total is ${cookieTotal}`);
-      console.log(averageSales);
-      averageArray.push(`${hours[i]}: ${averageSales} cookies`);
-    }
-    averageArray.push(`Total: ${cookieTotal}`);
-    console.log(`New Daily Sales final result is ${this.averageArray}`);
-    return averageArray;
-  },
-  render: function () {
-    const averageArray = this.hourlySalesAverage();
-    var titleElement = document.createElement('h2');
-    titleElement.textContent = this.name;
-    mainEl.appendChild(titleElement);
-    var ulEl = document.createElement('ul');
-    mainEl.appendChild(ulEl);
-    for (var j = 0; j < averageArray.length; j++) {
-      var liEl = document.createElement('li');
-      liEl.textContent = averageArray[j];
-      ulEl.appendChild(liEl);
-    }
-  }
-};
 
-// renders list of averages for alki store
-var alki = {
-  name: 'Alki',
-  minCustomer: 2,
-  maxCustomer: 16,
-  averageCookie: 4.6,
-  getRandomCustomerCount: function () {
-    return Math.round(Math.random() * (this.maxCustomer - this.minCustomer + 1) + this.minCustomer);
-  },
-  hourlySalesAverage: function () {
-    var cookieTotal = 0;
-    var averageArray = [];
-    for (var i = 0; i < hours.length; i++) {
-      var averageSales = this.getRandomCustomerCount() * this.averageCookie;
-      averageSales = Math.round(averageSales);
-      cookieTotal += averageSales;
-      console.log(`Average total is ${cookieTotal}`);
-      console.log(averageSales);
-      averageArray.push(`${hours[i]}: ${averageSales} cookies`);
-    }
-    averageArray.push(`Total: ${cookieTotal}`);
-    console.log(`New Daily Sales final result is ${this.averageArray}`);
-    return averageArray;
-  },
-  render: function () {
-    const averageArray = this.hourlySalesAverage();
-    var titleElement = document.createElement('h2');
-    titleElement.textContent = this.name;
-    mainEl.appendChild(titleElement);
-    var ulEl = document.createElement('ul');
-    mainEl.appendChild(ulEl);
-    for (var j = 0; j < averageArray.length; j++) {
-      var liEl = document.createElement('li');
-      liEl.textContent = averageArray[j];
-      ulEl.appendChild(liEl);
-    }
+function renderHours() {
+  var thElEmpty = document.createElement('th');
+  var trEl = document.createElement('tr');
+  thElEmpty.textContent = '';
+  trEl.appendChild(thElEmpty);
+  for (var i = 0; i < hours.length; i++) {
+    var thEl = document.createElement('th');
+    thEl.textContent = hours[i];
+    trEl.appendChild(thEl);
   }
+  tableEl.appendChild(trEl);
+  var thElDailyLocationTotal = document.createElement('th');
+  thElDailyLocationTotal.textContent = 'Daily Location Total';
+  trEl.appendChild(thElDailyLocationTotal);
+}
+
+function renderFooter() {
+  var elFooterRow = document.createElement('tr');
+  var footerTitleTd = document.createElement('td');
+  footerTitleTd.textContent = 'Totals';
+  elFooterRow.appendChild(footerTitleTd);
+  for (var i = 0; i <= hours.length; i++) {
+    var footerTotalTd = document.createElement('td');
+    footerTotalTd.textContent = 'NA';
+    elFooterRow.appendChild(footerTotalTd);
+  }
+  tableEl.appendChild(elFooterRow);
+}
+
+CreateStore.prototype.render = function () {
+  this.calculateHourlySales();
+  var tdElName = document.createElement('td');
+  var trElStore = document.createElement('tr');
+  tdElName.textContent = this.name;
+  trElStore.appendChild(tdElName);
+  for (var i = 0; i < this.hourlySalesList.length; i++) {
+    var tdEl = document.createElement('td');
+    tdEl.textContent = this.hourlySalesList[i];
+    trElStore.appendChild(tdEl);
+  }
+  var tdElCookieTotal = document.createElement('td');
+  tdElCookieTotal.textContent = this.cookieTotal;
+  trElStore.appendChild(tdElCookieTotal);
+  tableEl.appendChild(trElStore);
 };
 
 
-firstAndPike.render();
-seatacAirport.render();
-seattleCenter.render();
-capitolHill.render();
-alki.render();
+//got this function from MDN - math.random() docs
+CreateStore.prototype.getRandomCustomerCount = function () {
+  return Math.round(Math.random() * (this.maximumCustomer - this.minimumCustomer + 1) + this.minimumCustomer);
+};
 
+CreateStore.prototype.calculateHourlySales = function () {
+  this.hourlySalesList = [];
+  for (var i = 0; i < hours.length; i++) {
+    var hourlyCookieSales = this.getRandomCustomerCount() * this.averageCookieSale;
+    hourlyCookieSales = Math.round(hourlyCookieSales);
+    this.cookieTotal += hourlyCookieSales;
+    console.log(`Average total is ${this.cookieTotal}`);
+    console.log(hourlyCookieSales);
+    this.hourlySalesList.push(hourlyCookieSales);
+  }
+};
+
+storesCreated.push(new CreateStore('1st and Pike', 23, 65, 6.3));
+storesCreated.push(new CreateStore('SeaTac Airport', 3, 24, 1.2));
+storesCreated.push(new CreateStore('Seattle Center', 11, 38, 3.7));
+storesCreated.push(new CreateStore('Capitol Hill', 20, 38, 2.3));
+storesCreated.push(new CreateStore('Alki', 2, 16, 4.6));
+
+renderHours();
+for (var i = 0; i < storesCreated.length; i++) {
+  storesCreated[i].render();
+}
+
+renderFooter();
