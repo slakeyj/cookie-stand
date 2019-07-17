@@ -17,6 +17,7 @@ function CreateStore(name, minimumCustomer, maximumCustomer, averageCookieSale) 
   this.averageCookieSale = averageCookieSale;
   this.cookieTotal = 0;
   this.hourlySalesList = [];
+  storesCreated.push(this);
 }
 
 //got this function from MDN - math.random() docs
@@ -37,6 +38,7 @@ CreateStore.prototype.calculateHourlySales = function () {
   }
 };
 
+
 function handleSubmit(event) {
   event.preventDefault();
   console.log('the event.target.storename.value is ', event.target.storename.value);
@@ -48,6 +50,8 @@ function handleSubmit(event) {
   console.log('The minimum customer input is ' + minCustomerInput);
   console.log('The maximum customer input is ' + maxCustomerInput);
   console.log('The average cookies sales input is ' + averageCookieSaleInput);
+  new CreateStore(storeNameInput, minCustomerInput, maxCustomerInput, averageCookieSaleInput);
+  document.getElementById('table').remove();
 }
 
 // renders the hours list to the table header
@@ -99,13 +103,13 @@ function renderFooter() {
   tableEl.appendChild(elFooterRow);
 }
 
-storesCreated.push(new CreateStore('1st and Pike', 23, 65, 6.3));
-storesCreated.push(new CreateStore('SeaTac Airport', 3, 24, 1.2));
-storesCreated.push(new CreateStore('Seattle Center', 11, 38, 3.7));
-storesCreated.push(new CreateStore('Capitol Hill', 20, 38, 2.3));
-storesCreated.push(new CreateStore('Alki', 2, 16, 4.6));
+new CreateStore('1st and Pike', 23, 65, 6.3);
+new CreateStore('SeaTac Airport', 3, 24, 1.2);
+new CreateStore('Seattle Center', 11, 38, 3.7);
+new CreateStore('Capitol Hill', 20, 38, 2.3);
+new CreateStore('Alki', 2, 16, 4.6);
 
-
+formElement.addEventListener('submit', handleSubmit);
 
 renderHours();
 for (var i = 0; i < storesCreated.length; i++) {
@@ -113,6 +117,6 @@ for (var i = 0; i < storesCreated.length; i++) {
 }
 renderFooter();
 
-formElement.addEventListener('submit', handleSubmit);
+
 
 
