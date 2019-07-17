@@ -39,6 +39,23 @@ CreateStore.prototype.calculateHourlySales = function () {
 };
 
 
+function findHourlyStoreTotals() {
+  var allStoreHourTotals = [];
+  for (var i = 0; i < hours.length; i++) {
+    var runningTotal = 0;
+    for (var j = 0; j < storesCreated.length; j++) {
+      runningTotal += storesCreated[j].hourlySalesList[i];
+
+    }
+    allStoreHourTotals.push(runningTotal);
+  }
+  console.log(allStoreHourTotals.length);
+  console.log(allStoreHourTotals);
+  return allStoreHourTotals;
+}
+
+
+
 function handleSubmit(event) {
   event.preventDefault();
   console.log('the event.target.storename.value is ', event.target.storename.value);
@@ -104,7 +121,7 @@ function renderFooter() {
   elFooterRow.appendChild(footerTitleTd);
   for (var i = 0; i <= hours.length; i++) {
     var footerTotalTd = document.createElement('td');
-    footerTotalTd.textContent = 'NA';
+    footerTotalTd.textContent = findHourlyStoreTotals()[i];
     elFooterRow.appendChild(footerTotalTd);
   }
   tableEl.appendChild(elFooterRow);
@@ -123,7 +140,5 @@ for (var i = 0; i < storesCreated.length; i++) {
   storesCreated[i].render();
 }
 renderFooter();
-
-
 
 
