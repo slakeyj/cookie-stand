@@ -18,6 +18,9 @@ header img {
   margin-right: auto;
 }
 
+.make-block {
+  display: block;
+}
 
 table {
   width: 75%;
