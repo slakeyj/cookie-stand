@@ -1,6 +1,6 @@
 'use strict';
 
-// variable to store the main element
+// variable to store the table element
 var tableEl = document.getElementById('table');
 
 // array for hours of day
@@ -16,10 +16,27 @@ function CreateStore(name, minimumCustomer, maximumCustomer, averageCookieSale) 
   this.averageCookieSale = averageCookieSale;
   this.cookieTotal = 0;
   this.hourlySalesList = [];
-  this.dailyTotal = [];
 }
 
+//got this function from MDN - math.random() docs
+CreateStore.prototype.getRandomCustomerCount = function () {
+  return Math.round(Math.random() * (this.maximumCustomer - this.minimumCustomer + 1) + this.minimumCustomer);
+};
 
+// calculates the hourly sales of a store
+CreateStore.prototype.calculateHourlySales = function () {
+  this.hourlySalesList = [];
+  for (var i = 0; i < hours.length; i++) {
+    var hourlyCookieSales = Math.ceil(this.getRandomCustomerCount() * this.averageCookieSale);
+    hourlyCookieSales = Math.round(hourlyCookieSales);
+    this.cookieTotal += hourlyCookieSales;
+    console.log(`Average total is ${this.cookieTotal}`);
+    console.log(hourlyCookieSales);
+    this.hourlySalesList.push(hourlyCookieSales);
+  }
+};
+
+// renders the hours list to the table header
 function renderHours() {
   var thElEmpty = document.createElement('th');
   var trEl = document.createElement('tr');
@@ -36,23 +53,11 @@ function renderHours() {
   trEl.appendChild(thElDailyLocationTotal);
 }
 
-function renderFooter() {
-  var elFooterRow = document.createElement('tr');
-  var footerTitleTd = document.createElement('td');
-  footerTitleTd.textContent = 'Totals';
-  elFooterRow.appendChild(footerTitleTd);
-  for (var i = 0; i <= hours.length; i++) {
-    var footerTotalTd = document.createElement('td');
-    footerTotalTd.textContent = 'NA';
-    elFooterRow.appendChild(footerTotalTd);
-  }
-  tableEl.appendChild(elFooterRow);
-}
-
+// renders the hourly numbers for a store
 CreateStore.prototype.render = function () {
   this.calculateHourlySales();
-  var tdElName = document.createElement('td');
   var trElStore = document.createElement('tr');
+  var tdElName = document.createElement('td');
   tdElName.textContent = this.name;
   trElStore.appendChild(tdElName);
   for (var i = 0; i < this.hourlySalesList.length; i++) {
@@ -66,23 +71,19 @@ CreateStore.prototype.render = function () {
   tableEl.appendChild(trElStore);
 };
 
-
-//got this function from MDN - math.random() docs
-CreateStore.prototype.getRandomCustomerCount = function () {
-  return Math.round(Math.random() * (this.maximumCustomer - this.minimumCustomer + 1) + this.minimumCustomer);
-};
-
-CreateStore.prototype.calculateHourlySales = function () {
-  this.hourlySalesList = [];
-  for (var i = 0; i < hours.length; i++) {
-    var hourlyCookieSales = this.getRandomCustomerCount() * this.averageCookieSale;
-    hourlyCookieSales = Math.round(hourlyCookieSales);
-    this.cookieTotal += hourlyCookieSales;
-    console.log(`Average total is ${this.cookieTotal}`);
-    console.log(hourlyCookieSales);
-    this.hourlySalesList.push(hourlyCookieSales);
+// renders the footer
+function renderFooter() {
+  var elFooterRow = document.createElement('tr');
+  var footerTitleTd = document.createElement('td');
+  footerTitleTd.textContent = 'Totals';
+  elFooterRow.appendChild(footerTitleTd);
+  for (var i = 0; i <= hours.length; i++) {
+    var footerTotalTd = document.createElement('td');
+    footerTotalTd.textContent = 'NA';
+    elFooterRow.appendChild(footerTotalTd);
   }
-};
+  tableEl.appendChild(elFooterRow);
+}
 
 storesCreated.push(new CreateStore('1st and Pike', 23, 65, 6.3));
 storesCreated.push(new CreateStore('SeaTac Airport', 3, 24, 1.2));
@@ -94,5 +95,4 @@ renderHours();
 for (var i = 0; i < storesCreated.length; i++) {
   storesCreated[i].render();
 }
-
 renderFooter();
