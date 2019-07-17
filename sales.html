@@ -15,27 +15,28 @@
   </header>
   <main id="main">
     <form id="storeform">
-      <fieldsets>
+      <fieldset>
         <label class="make-block">Please Input Store Information</label>
         <div class="make-block">
           <label>Store Name</label>
-          <input name="storename" type="text" />
+          <input name="storename" type="text" required />
         </div>
         <div class="make-block">
           <label>Minimum Customers/Hour</label>
-          <input name="mincustomer" type="text" />
+          <input name="mincustomer" type="text" required />
         </div>
         <div class="make-block">
           <label>Maximum Customers/Hour</label>
-          <input name="maxcustomer" type="text" />
+          <input name="maxcustomer" type="text" required />
         </div>
         <div class="make-block">
           <label>Average Cookies Purchased/Customer</label>
-          <input name="averagecookies" type="text" />
+          <input name="averagecookies" type="text" required />
         </div>
         <input type="submit" name="submitform" value="Submit" />
-        </fieldset>
+      </fieldset>
     </form>
+
     <table>
       <tbody id="table"></tbody>
     </table>

@@ -55,7 +55,7 @@ function findHourlyStoreTotals() {
 }
 
 
-
+// event handler for hitting submit
 function handleSubmit(event) {
   event.preventDefault();
   console.log('the event.target.storename.value is ', event.target.storename.value);
