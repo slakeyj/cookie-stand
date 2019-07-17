@@ -51,7 +51,14 @@ function handleSubmit(event) {
   console.log('The maximum customer input is ' + maxCustomerInput);
   console.log('The average cookies sales input is ' + averageCookieSaleInput);
   new CreateStore(storeNameInput, minCustomerInput, maxCustomerInput, averageCookieSaleInput);
-  document.getElementById('table').remove();
+  tableEl.innerHTML = '';
+  renderHours();
+  for (var i = 0; i < storesCreated.length; i++) {
+    storesCreated[i].render();
+    console.log('we are in the render loop');
+  }
+  console.log(storesCreated);
+  renderFooter();
 }
 
 // renders the hours list to the table header
