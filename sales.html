@@ -4,41 +4,47 @@
 <head>
   <link href="css/reset.css" type="text/css" rel="stylesheet" />
   <link href="css/style.css" type="text/css" rel="stylesheet" />
+  <title>Salmon Cookies</title>
 
 </head>
 
 <body>
   <header>
-    <h1>Salmon Cookies</h1>
+
     <img src="salmon.png" alt="painting of a salmon" title="salmon" />
+    <h1>Salmon Cookies</h1>
   </header>
   <main id="main">
-    <fieldset>
-      <label class="make-block">Please Input Store Information</label>
-      <div class="make-block">
-        <label>Store Name</label>
-        <input class=name="username" type="text" />
-      </div>
-      <div class="make-block">
-        <label>Minimum Customers/Hour</label>
-        <input name="mincustomer" type="text" />
-      </div>
-      <div class="make-block">
-        <label>Maximum Customers/Hour</label>
-        <input name="mincustomer" type="text" />
-      </div>
-      <div class="make-block">
-        <label>Minimum Customers/Hour</label>
-        <input name="mincustomer" type="text" />
-      </div>
-    </fieldset>
+    <form id="storeform">
+      <fieldset>
+        <label class="make-block center">Please Input Store Information</label>
+        <div class="make-block">
+          <label>Store Name</label>
+          <input name="storename" type="text" required />
+        </div>
+        <div class="make-block">
+          <label>Minimum Customers/Hour</label>
+          <input name="mincustomer" type="text" required />
+        </div>
+        <div class="make-block">
+          <label>Maximum Customers/Hour</label>
+          <input name="maxcustomer" type="text" required />
+        </div>
+        <div class="make-block">
+          <label>Average Cookies Purchased/Customer</label>
+          <input name="averagecookies" type="text" required />
+        </div>
+        <button id="submit-button" name="submitform">Submit</button>
+      </fieldset>
+    </form>
+
     <table>
       <tbody id="table"></tbody>
     </table>
 
   </main>
   <footer>
-    &#169 2019
+    &#169 Salmon Cookies, 2019
   </footer>
   <script type="text/javascript" src="js/app.js"></script>
 </body>

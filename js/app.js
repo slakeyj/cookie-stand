@@ -2,6 +2,7 @@
 
 // variable to store the table element
 var tableEl = document.getElementById('table');
+var formElement = document.getElementById('storeform');
 
 // array for hours of day
 var hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
@@ -16,6 +17,7 @@ function CreateStore(name, minimumCustomer, maximumCustomer, averageCookieSale) 
   this.averageCookieSale = averageCookieSale;
   this.cookieTotal = 0;
   this.hourlySalesList = [];
+  storesCreated.push(this);
 }
 
 //got this function from MDN - math.random() docs
@@ -30,11 +32,51 @@ CreateStore.prototype.calculateHourlySales = function () {
     var hourlyCookieSales = Math.ceil(this.getRandomCustomerCount() * this.averageCookieSale);
     hourlyCookieSales = Math.round(hourlyCookieSales);
     this.cookieTotal += hourlyCookieSales;
-    console.log(`Average total is ${this.cookieTotal}`);
-    console.log(hourlyCookieSales);
+    // console.log(`Average total is ${this.cookieTotal}`);
+    // console.log(hourlyCookieSales);
     this.hourlySalesList.push(hourlyCookieSales);
   }
 };
+
+
+function findHourlyStoreTotals() {
+  var allStoreHourTotals = [];
+  for (var i = 0; i < hours.length; i++) {
+    var runningTotal = 0;
+    for (var j = 0; j < storesCreated.length; j++) {
+      runningTotal += storesCreated[j].hourlySalesList[i];
+
+    }
+    allStoreHourTotals.push(runningTotal);
+  }
+  console.log(allStoreHourTotals.length);
+  console.log(allStoreHourTotals);
+  return allStoreHourTotals;
+}
+
+
+// event handler for hitting submit
+function handleSubmit(event) {
+  event.preventDefault();
+  console.log('the event.target.storename.value is ', event.target.storename.value);
+  var storeNameInput = event.target.storename.value;
+  var minCustomerInput = event.target.mincustomer.value;
+  var maxCustomerInput = event.target.maxcustomer.value;
+  var averageCookieSaleInput = event.target.averagecookies.value;
+  console.log('The store name input is ' + storeNameInput);
+  console.log('The minimum customer input is ' + minCustomerInput);
+  console.log('The maximum customer input is ' + maxCustomerInput);
+  console.log('The average cookies sales input is ' + averageCookieSaleInput);
+  new CreateStore(storeNameInput, minCustomerInput, maxCustomerInput, averageCookieSaleInput);
+  tableEl.innerHTML = '';
+  renderHours();
+  for (var i = 0; i < storesCreated.length; i++) {
+    storesCreated[i].render();
+    console.log('we are in the render loop');
+  }
+  console.log(storesCreated);
+  renderFooter();
+}
 
 // renders the hours list to the table header
 function renderHours() {
@@ -79,20 +121,24 @@ function renderFooter() {
   elFooterRow.appendChild(footerTitleTd);
   for (var i = 0; i <= hours.length; i++) {
     var footerTotalTd = document.createElement('td');
-    footerTotalTd.textContent = 'NA';
+    footerTotalTd.textContent = findHourlyStoreTotals()[i];
     elFooterRow.appendChild(footerTotalTd);
   }
   tableEl.appendChild(elFooterRow);
 }
 
-storesCreated.push(new CreateStore('1st and Pike', 23, 65, 6.3));
-storesCreated.push(new CreateStore('SeaTac Airport', 3, 24, 1.2));
-storesCreated.push(new CreateStore('Seattle Center', 11, 38, 3.7));
-storesCreated.push(new CreateStore('Capitol Hill', 20, 38, 2.3));
-storesCreated.push(new CreateStore('Alki', 2, 16, 4.6));
+new CreateStore('1st and Pike', 23, 65, 6.3);
+new CreateStore('SeaTac Airport', 3, 24, 1.2);
+new CreateStore('Seattle Center', 11, 38, 3.7);
+new CreateStore('Capitol Hill', 20, 38, 2.3);
+new CreateStore('Alki', 2, 16, 4.6);
+
+formElement.addEventListener('submit', handleSubmit);
 
 renderHours();
 for (var i = 0; i < storesCreated.length; i++) {
   storesCreated[i].render();
 }
 renderFooter();
+
+

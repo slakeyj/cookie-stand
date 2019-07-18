@@ -3,19 +3,29 @@
 h1 {
   font-size: 70px;
   text-align: center;
-  margin: 80px;
+  margin-top: 50px;
+  margin-bottom: 80px;
   color: rgb(172, 68, 45);
   font-family: 'Alegreya Sans SC', sans-serif;
 }
 
+header {
+  border: 2px black solid;
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+  background-color: rgb(250, 240, 209);
+}
 body {
-  background-color: #F2CAA7;
+  background-color: rgb(250, 225, 202);
 }
 
 header img {
   display: block;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 50px;
 }
 
 .make-block {
@@ -38,11 +48,39 @@ tr {
 th {
   text-align: left;
   padding: 15px;
-  
 }
 
 td {
   padding: 15px;
   border-right: 1px solid black;
   border-left: 1px solid black;
+  background-color: rgb(250, 240, 209);
+}
+
+form {
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  margin-top: 100px;
+  margin-bottom: 100px;
+  background-color: rgb(250, 240, 209);
+  border: 1px solid black;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 20px;
+  line-height: 2.0em;
+  padding: 20px;
+}
+
+.center {
+  text-align: center;
+}
+
+#submit-button {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  margin-top: 20px;
+  width: 8em;
+  height: 3em;
+  font-size: 20px;
 }
