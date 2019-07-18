@@ -10,13 +10,14 @@
 
 <body>
   <header>
-    <h1>Salmon Cookies</h1>
+
     <img src="salmon.png" alt="painting of a salmon" title="salmon" />
+    <h1>Salmon Cookies</h1>
   </header>
   <main id="main">
     <form id="storeform">
       <fieldset>
-        <label class="make-block">Please Input Store Information</label>
+        <label class="make-block center">Please Input Store Information</label>
         <div class="make-block">
           <label>Store Name</label>
           <input name="storename" type="text" required />
@@ -33,7 +34,7 @@
           <label>Average Cookies Purchased/Customer</label>
           <input name="averagecookies" type="text" required />
         </div>
-        <input type="submit" name="submitform" value="Submit" />
+        <button id="submit-button" name="submitform">Submit</button>
       </fieldset>
     </form>
 
@@ -43,7 +44,7 @@
 
   </main>
   <footer>
-    &#169 2019
+    &#169 Salmon Cookies, 2019
   </footer>
   <script type="text/javascript" src="js/app.js"></script>
 </body>
