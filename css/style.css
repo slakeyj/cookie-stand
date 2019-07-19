@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Lobster&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Amatic+SC&display=swap');
 
 nav li {
   display: inline-block;
@@ -45,9 +46,9 @@ body {
 }
 
 h2 {
-  font-size: 20px;
+  font-size: 50px;
   text-align: left;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Amatic SC', cursive;
   font-weight: bold;
   color: rgb(157, 67, 67);  
   margin-bottom: 20px;
@@ -63,7 +64,6 @@ h2 {
   display: inline-block;
   width: 30%;
   margin: 15px;
-  
 }
 
 .main-box img {
@@ -73,9 +73,28 @@ h2 {
 .main-box p {
   text-align: left;
   line-height: 1.5em;
+  font-size: 20px;
+}
+
+#merchandise-button {
+  padding: 10px;
+  height: 50px;
+  width: 140px;
+  font-size: 16px;
+  margin-top: 50px;
+  margin-bottom: 15px;
+  background-color: black;
+  color: white;
+}
+
+#chinook-pic {
+  margin-bottom: 70px;
   
 }
 
+#hours-box {
+  margin-top: 30px;
+}
 
 table {
   width: 75%;

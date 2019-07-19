@@ -131,11 +131,10 @@ function renderFooter() {
   tableEl.appendChild(elFooterRow);
 }
 
-//Rework this
-//add totals of all here
-// var thTotalOfAll = document.createElement('th');
-// footerTitleTd.textContent = totalsOfAll;
-// elFooterRow.appendChild(thTotalOfAll);
+//Rework this for total of totals
+// var tdTotalOfAll = document.createElement('td');
+// tdTotalOfAll.textContent = totalsOfAll;
+// elFooterRow.appendChild(tdTotalOfAll);
 
 new CreateStore('1st and Pike', 23, 65, 6.3);
 new CreateStore('SeaTac Airport', 3, 24, 1.2);
