@@ -38,14 +38,14 @@ CreateStore.prototype.calculateHourlySales = function () {
   }
 };
 
-
+var totalsOfAll = 0;
 function findHourlyStoreTotals() {
   var allStoreHourTotals = [];
   for (var i = 0; i < hours.length; i++) {
     var runningTotal = 0;
     for (var j = 0; j < storesCreated.length; j++) {
       runningTotal += storesCreated[j].hourlySalesList[i];
-
+      totalsOfAll += storesCreated[j].hourlySalesList[i];
     }
     allStoreHourTotals.push(runningTotal);
   }
@@ -53,7 +53,6 @@ function findHourlyStoreTotals() {
   console.log(allStoreHourTotals);
   return allStoreHourTotals;
 }
-
 
 // event handler for hitting submit
 function handleSubmit(event) {
@@ -80,18 +79,20 @@ function handleSubmit(event) {
 
 // renders the hours list to the table header
 function renderHours() {
-  var thElEmpty = document.createElement('th');
   var trEl = document.createElement('tr');
+  var thElEmpty = document.createElement('th');
   thElEmpty.textContent = '';
   trEl.appendChild(thElEmpty);
   for (var i = 0; i < hours.length; i++) {
     var thEl = document.createElement('th');
+    thEl.classList.add('table-heading');
     thEl.textContent = hours[i];
     trEl.appendChild(thEl);
   }
   tableEl.appendChild(trEl);
   var thElDailyLocationTotal = document.createElement('th');
   thElDailyLocationTotal.textContent = 'Daily Location Total';
+  thElDailyLocationTotal.classList.add('table-heading');
   trEl.appendChild(thElDailyLocationTotal);
 }
 
@@ -101,6 +102,7 @@ CreateStore.prototype.render = function () {
   var trElStore = document.createElement('tr');
   var tdElName = document.createElement('td');
   tdElName.textContent = this.name;
+  tdElName.classList.add('table-heading');
   trElStore.appendChild(tdElName);
   for (var i = 0; i < this.hourlySalesList.length; i++) {
     var tdEl = document.createElement('td');
@@ -118,14 +120,21 @@ function renderFooter() {
   var elFooterRow = document.createElement('tr');
   var footerTitleTd = document.createElement('td');
   footerTitleTd.textContent = 'Totals';
+  footerTitleTd.classList.add('table-heading');
   elFooterRow.appendChild(footerTitleTd);
   for (var i = 0; i <= hours.length; i++) {
     var footerTotalTd = document.createElement('td');
     footerTotalTd.textContent = findHourlyStoreTotals()[i];
     elFooterRow.appendChild(footerTotalTd);
   }
+  //add totals of all
   tableEl.appendChild(elFooterRow);
 }
+
+//Rework this for total of totals
+// var tdTotalOfAll = document.createElement('td');
+// tdTotalOfAll.textContent = totalsOfAll;
+// elFooterRow.appendChild(tdTotalOfAll);
 
 new CreateStore('1st and Pike', 23, 65, 6.3);
 new CreateStore('SeaTac Airport', 3, 24, 1.2);
