@@ -20,8 +20,9 @@ nav li {
   margin-top: 15px;
   font-family: 'Montserrat', sans-serif;
   text-transform: uppercase;
-  border: 1px dotted black
+  border: 1px solid black
 }
+
 
 h1 {
   font-size: 70px;
@@ -47,86 +48,60 @@ header img {
   width: 700px;
   padding-bottom: 60px;
 }
+html {
+  background-color: white;
+}
 
 body {
   background-color: rgb(212, 229, 247);
   margin: auto;
   width: 980px;
+  border: 1px solid black;
+  padding: 30px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 h2 {
   font-size: 30px;
   font-family: 'Courgette', cursive;
   font-weight: bold;
-  color: rgb(157, 67, 67);  
-  border: 1px dotted black;
-  display: inline;
+  color: rgb(157, 67, 67);
   background-color: white;
   padding: 10px;
- 
 }
 
-#welcome {
-  position: absolute;
-  margin-top: -50px;
-  margin-left: 50px;
+#top-section {
+  margin-top: 70px;
 }
 
-#welcome-box {
-  margin-top: 50px;
+.text-indent {
   text-indent: 30px;
-  border: 1px dotted black;
-  padding: 20px;
- background-color: white;
 }
 
-.move-top {
-  margin-top: 25px;
-}
-
-#address-box {
-  border: 1px dotted black;
-  padding: 20px;
-  background-color: white;
-}
-
-#hours-box {
-  margin-top: 30px;
-  border: 1px dotted black;
-  padding: 20px;
-  background-color: white;
-}
-
-
-#merchandise-box {
-  border: 1px dotted black;
-  padding: 20px;
-  background-color: white;
-}
-
-
-.make-block {
-  display: block;
+#family-image img {
+  width: 550px; 
 }
 
 .main-box {
   display: inline-block;
   width: 30%;
   margin: 15px;
+  vertical-align: top;
 }
 
-#family-image img {
-  width: 550px; 
-}
-#cookie-image img {
-  width: 350px; 
+.text-box {
+  border: 1px dotted black;
+  padding: 20px;
+  background-color: white;
+  text-align: center;
 }
 
 .main-box p {
   text-align: left;
-  line-height: 1.5em;
-  font-size: 20px;
-  
+  line-height: 2.0em;
+  font-size: 16px;
+  font-family: 'Montserrat', sans-serif;
 }
 
 #merchandise-button {
@@ -138,15 +113,33 @@ h2 {
   margin-bottom: 15px;
   background-color: white;
   color: black;
-  border: 1px dotted black;
+  border: 1px solid black;
+  text-transform: uppercase;
+  font-family: 'Montserrat', sans-serif;
+}
+#shirt-img{
+  width: 450px;
+  margin-left: 100px;
 }
 
-#chinook-pic {
-  margin-bottom: 70px;
+#cookie-cutter{
+  width: 350px;
   
 }
 
+#cookie-image {
+  width: 450px; 
+  margin-left: 130px;
+  margin-top: 30px;
+}
+#chinook-pic {
+  margin-top: 50px;
+  margin-left: 80px;
+}
 
+#fish-pic {
+  margin-left: 100px;
+}
 
 table {
   width: 75%;
@@ -223,3 +216,5 @@ footer {
   text-align: center;
   margin-top: 100px;
 }
+
+
