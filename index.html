@@ -8,6 +8,10 @@
 </head>
 
 <body>
+  <header>
+    <h1>Salmon Cookies</h1>
+    <img src="images/salmon.png" alt="painting of a salmon" title="salmon" />
+  </header>
   <nav>
     <ul>
       <li><a>Home</a></li>
@@ -17,40 +21,36 @@
       <li><a>Events</a></li>
     </ul>
   </nav>
-  <header>
-    <img src="images/salmon.png" alt="painting of a salmon" title="salmon" />
-    <h1>Salmon Cookies</h1>
-  </header>
+
   <main>
     <section>
-      <div class="main-box">
-        <img src="images/family.jpg" alt="portrait of a family" title="portrait of a family" />
-      </div>
-      <div class="main-box">
-        <h2 class="move-top">Welcome to Salmon Cookies!</h2>
-        <p class="move-top">We are a family owned business dedicated to bringing you the best in fish desserts. We are
+      <div class="main-box" id="welcome-box">
+        <h2 id="welcome">Welcome!</h2>
+        <p class="move-top">We are a family owned business dedicated to bringing you the best in fish
+          desserts. We are
           best known for our
           award winning Salmon Cookies. Once you try one of our cookies, you'll soon find yourself craving their
           exquisite flavor.
         </p>
       </div>
-
-      <div class="main-box">
-        <img src="images/frosted-cookie.jpg" alt="frosted fish cookie" title="frosted fish cookie" />
+      <div class="main-box" id="family-image">
+        <img src="images/family.jpg" alt="portrait of a family" title="portrait of a family" />
       </div>
     </section>
     <section>
+
       <div class="main-box">
         <h2>Contact Us</h2>
-        <p>Address: 314 Pine St.<br />
+        <p id="address-box">Address: 314 Pine St.<br />
           Seattle, WA 98119 <br />
           Phone: 206-555-5555 <br />
-          E-mail: salmoncookies@fakeemail.com
+          E-mail: salmoncookies@email.com
         </p>
       </div>
-      <div class="main-box" id="chinook-pic">
-        <img src="images/chinook.jpg" alt="painting of a chinook" title="painting of a chinook" />
+      <div class="main-box">
+        <img src="images/fish.jpg" alt="group of fish" title="group of fish" />
       </div>
+
       <div class="main-box" id="hours-box">
         <h2>Hours</h2>
         <p>Sunday: 10:00am - 5:00pm</p>
@@ -63,13 +63,17 @@
       </div>
     </section>
     <section>
+      <div class="main-box" id="cookie-image">
+        <img src="images/frosted-cookie.jpg" alt="frosted fish cookie" title="frosted fish cookie" />
+      </div>
       <div class="main-box">
         <img src="images/shirt.jpg" alt="shirt with a fish on it" title="fish shirt" />
 
       </div>
       <div class="main-box" id="merchandise">
         <h2>Merchandise</h2>
-        <p>We offer unique fish themed merchandise that can be purchased through our website or at our Seattle location.
+        <p id="merchandise-box">We offer unique fish themed merchandise that can be purchased through our website or at
+          our Seattle location.
           We offer salmon shirts, salmon mugs, salmon shaped cookied cutters, and more! Just click the button below to
           see our selection of fish themed goods.</p>
         <button id="merchandise-button">Merchandise</button>
@@ -80,6 +84,10 @@
 
       </div>
     </section>
+
+    <div class="main-box" id="chinook-pic">
+      <img src="images/chinook.jpg" alt="painting of a chinook" title="painting of a chinook" />
+    </div>
 
   </main>
   <footer>
