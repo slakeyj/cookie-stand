@@ -67,7 +67,6 @@ h2 {
   font-family: 'Courgette', cursive;
   font-weight: bold;
   color: rgb(157, 67, 67);
-  background-color: white;
   padding: 10px;
 }
 
@@ -85,7 +84,7 @@ h2 {
 
 .main-box {
   display: inline-block;
-  width: 30%;
+  
   margin: 15px;
   vertical-align: top;
 }
@@ -93,8 +92,10 @@ h2 {
 .text-box {
   border: 1px dotted black;
   padding: 20px;
-  background-color: white;
   text-align: center;
+  background-color: white;
+  width: 30%;
+  margin-top: 30px;
 }
 
 .main-box p {
@@ -104,41 +105,30 @@ h2 {
   font-family: 'Montserrat', sans-serif;
 }
 
-#merchandise-button {
-  padding: 10px;
-  height: 50px;
-  width: 140px;
-  font-size: 16px;
+
+/* https://teamtreehouse.com/community/backgroundimage-opacity source for background blend */
+.faded-background {
+  background-size: cover;
+  background-color: rgba(255, 254, 254, 0.8);
+  background-blend-mode: lighten;
+}
+#background-fish {
+  background-image: url("../images/fish.jpg");
+  margin-left: 150px;
+  height: 270px;
+}
+
+#background-chinook {
+  background-image: url("../images/chinook.jpg");
+  background-size: contain;
+  background-repeat: cover;
+}
+
+.merchandise-img {
+  width: 200px;
+  margin-left: 50px;
   margin-top: 50px;
-  margin-bottom: 15px;
-  background-color: white;
-  color: black;
-  border: 1px solid black;
-  text-transform: uppercase;
-  font-family: 'Montserrat', sans-serif;
-}
-#shirt-img{
-  width: 450px;
-  margin-left: 100px;
-}
-
-#cookie-cutter{
-  width: 350px;
-  
-}
-
-#cookie-image {
-  width: 450px; 
-  margin-left: 130px;
-  margin-top: 30px;
-}
-#chinook-pic {
-  margin-top: 50px;
-  margin-left: 80px;
-}
-
-#fish-pic {
-  margin-left: 100px;
+  display: inline-block;
 }
 
 table {
@@ -215,6 +205,21 @@ footer {
   padding-bottom: 50px;
   text-align: center;
   margin-top: 100px;
+ 
+}
+
+footer p {
+  padding-top: 20px;
+}
+
+hr {
+  width: 300px;
+  display: inline-block;
+  margin: 20px;
+}
+
+#cookie-image {
+  width: 100px; 
 }
 
 
