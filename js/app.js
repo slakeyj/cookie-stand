@@ -38,8 +38,9 @@ CreateStore.prototype.calculateHourlySales = function () {
   }
 };
 
-var totalsOfAll = 0;
+
 function findHourlyStoreTotals() {
+  var totalsOfAll = 0;
   var allStoreHourTotals = [];
   for (var i = 0; i < hours.length; i++) {
     var runningTotal = 0;
@@ -49,9 +50,10 @@ function findHourlyStoreTotals() {
     }
     allStoreHourTotals.push(runningTotal);
   }
-  console.log(allStoreHourTotals.length);
+  //console.log(totalsOfAll);
+  // console.log(allStoreHourTotals.length);
   console.log(allStoreHourTotals);
-  return allStoreHourTotals;
+  return [allStoreHourTotals, totalsOfAll];
 }
 
 // event handler for hitting submit
@@ -122,19 +124,17 @@ function renderFooter() {
   footerTitleTd.textContent = 'Totals';
   footerTitleTd.classList.add('table-heading');
   elFooterRow.appendChild(footerTitleTd);
-  for (var i = 0; i <= hours.length; i++) {
+  for (var i = 0; i < hours.length; i++) {
     var footerTotalTd = document.createElement('td');
-    footerTotalTd.textContent = findHourlyStoreTotals()[i];
+    footerTotalTd.textContent = findHourlyStoreTotals()[0][i];
     elFooterRow.appendChild(footerTotalTd);
   }
-  //add totals of all
+  var tdTotalOfAll = document.createElement('td');
+  tdTotalOfAll.textContent = findHourlyStoreTotals()[1];
+  elFooterRow.appendChild(tdTotalOfAll);
   tableEl.appendChild(elFooterRow);
 }
 
-//Rework this for total of totals
-// var tdTotalOfAll = document.createElement('td');
-// tdTotalOfAll.textContent = totalsOfAll;
-// elFooterRow.appendChild(tdTotalOfAll);
 
 new CreateStore('1st and Pike', 23, 65, 6.3);
 new CreateStore('SeaTac Airport', 3, 24, 1.2);
