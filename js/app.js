@@ -25,9 +25,10 @@ CreateStore.prototype.getRandomCustomerCount = function () {
   return Math.round(Math.random() * (this.maximumCustomer - this.minimumCustomer + 1) + this.minimumCustomer);
 };
 
-// calculates the hourly sales of a store
+// calculates the hourly sales of a store over a day
 CreateStore.prototype.calculateHourlySales = function () {
   this.hourlySalesList = [];
+  this.cookieTotal = 0;
   for (var i = 0; i < hours.length; i++) {
     var hourlyCookieSales = Math.ceil(this.getRandomCustomerCount() * this.averageCookieSale);
     hourlyCookieSales = Math.round(hourlyCookieSales);
@@ -38,7 +39,26 @@ CreateStore.prototype.calculateHourlySales = function () {
   }
 };
 
+// renders the hourly numbers for a store
+CreateStore.prototype.render = function () {
+  this.calculateHourlySales();
+  var trElStore = document.createElement('tr');
+  var tdElName = document.createElement('td');
+  tdElName.textContent = this.name;
+  tdElName.classList.add('table-heading');
+  trElStore.appendChild(tdElName);
+  for (var i = 0; i < this.hourlySalesList.length; i++) {
+    var tdEl = document.createElement('td');
+    tdEl.textContent = this.hourlySalesList[i];
+    trElStore.appendChild(tdEl);
+  }
+  var tdElCookieTotal = document.createElement('td');
+  tdElCookieTotal.textContent = this.cookieTotal;
+  trElStore.appendChild(tdElCookieTotal);
+  tableEl.appendChild(trElStore);
+};
 
+// finds the totals of each store at a particular hour
 function findHourlyStoreTotals() {
   var totalsOfAll = 0;
   var allStoreHourTotals = [];
@@ -50,10 +70,46 @@ function findHourlyStoreTotals() {
     }
     allStoreHourTotals.push(runningTotal);
   }
-  //console.log(totalsOfAll);
-  // console.log(allStoreHourTotals.length);
-  console.log(allStoreHourTotals);
+  console.log('totals of all is ', totalsOfAll);
+  console.log('running total is ', runningTotal);
   return [allStoreHourTotals, totalsOfAll];
+}
+
+// renders the footer
+function renderFooter() {
+  var elFooterRow = document.createElement('tr');
+  var footerTitleTd = document.createElement('td');
+  footerTitleTd.textContent = 'Totals';
+  footerTitleTd.classList.add('table-heading');
+  elFooterRow.appendChild(footerTitleTd);
+  for (var i = 0; i < hours.length; i++) {
+    var footerTotalTd = document.createElement('td');
+    footerTotalTd.textContent = findHourlyStoreTotals()[0][i];
+    elFooterRow.appendChild(footerTotalTd);
+  }
+  var tdTotalOfAll = document.createElement('td');
+  tdTotalOfAll.textContent = findHourlyStoreTotals()[1];
+  elFooterRow.appendChild(tdTotalOfAll);
+  tableEl.appendChild(elFooterRow);
+}
+
+// renders the hours list to the table header
+function renderHours() {
+  var trEl = document.createElement('tr');
+  var thElEmpty = document.createElement('th');
+  thElEmpty.textContent = '';
+  trEl.appendChild(thElEmpty);
+  for (var i = 0; i < hours.length; i++) {
+    var thEl = document.createElement('th');
+    thEl.classList.add('table-heading');
+    thEl.textContent = hours[i];
+    trEl.appendChild(thEl);
+  }
+  tableEl.appendChild(trEl);
+  var thElDailyLocationTotal = document.createElement('th');
+  thElDailyLocationTotal.textContent = 'Daily Location Total';
+  thElDailyLocationTotal.classList.add('table-heading');
+  trEl.appendChild(thElDailyLocationTotal);
 }
 
 // event handler for hitting submit
@@ -78,63 +134,6 @@ function handleSubmit(event) {
   console.log(storesCreated);
   renderFooter();
 }
-
-// renders the hours list to the table header
-function renderHours() {
-  var trEl = document.createElement('tr');
-  var thElEmpty = document.createElement('th');
-  thElEmpty.textContent = '';
-  trEl.appendChild(thElEmpty);
-  for (var i = 0; i < hours.length; i++) {
-    var thEl = document.createElement('th');
-    thEl.classList.add('table-heading');
-    thEl.textContent = hours[i];
-    trEl.appendChild(thEl);
-  }
-  tableEl.appendChild(trEl);
-  var thElDailyLocationTotal = document.createElement('th');
-  thElDailyLocationTotal.textContent = 'Daily Location Total';
-  thElDailyLocationTotal.classList.add('table-heading');
-  trEl.appendChild(thElDailyLocationTotal);
-}
-
-// renders the hourly numbers for a store
-CreateStore.prototype.render = function () {
-  this.calculateHourlySales();
-  var trElStore = document.createElement('tr');
-  var tdElName = document.createElement('td');
-  tdElName.textContent = this.name;
-  tdElName.classList.add('table-heading');
-  trElStore.appendChild(tdElName);
-  for (var i = 0; i < this.hourlySalesList.length; i++) {
-    var tdEl = document.createElement('td');
-    tdEl.textContent = this.hourlySalesList[i];
-    trElStore.appendChild(tdEl);
-  }
-  var tdElCookieTotal = document.createElement('td');
-  tdElCookieTotal.textContent = this.cookieTotal;
-  trElStore.appendChild(tdElCookieTotal);
-  tableEl.appendChild(trElStore);
-};
-
-// renders the footer
-function renderFooter() {
-  var elFooterRow = document.createElement('tr');
-  var footerTitleTd = document.createElement('td');
-  footerTitleTd.textContent = 'Totals';
-  footerTitleTd.classList.add('table-heading');
-  elFooterRow.appendChild(footerTitleTd);
-  for (var i = 0; i < hours.length; i++) {
-    var footerTotalTd = document.createElement('td');
-    footerTotalTd.textContent = findHourlyStoreTotals()[0][i];
-    elFooterRow.appendChild(footerTotalTd);
-  }
-  var tdTotalOfAll = document.createElement('td');
-  tdTotalOfAll.textContent = findHourlyStoreTotals()[1];
-  elFooterRow.appendChild(tdTotalOfAll);
-  tableEl.appendChild(elFooterRow);
-}
-
 
 new CreateStore('1st and Pike', 23, 65, 6.3);
 new CreateStore('SeaTac Airport', 3, 24, 1.2);
