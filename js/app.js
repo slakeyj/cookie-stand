@@ -59,8 +59,9 @@ CreateStore.prototype.render = function () {
 };
 
 // finds the totals of each store at a particular hour
+var totalsOfAll = 0;
 function findHourlyStoreTotals() {
-  var totalsOfAll = 0;
+
   var allStoreHourTotals = [];
   for (var i = 0; i < hours.length; i++) {
     var runningTotal = 0;
