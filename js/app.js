@@ -2,7 +2,7 @@
 $(function () {
   // variable to store the table element
   var tableEl = document.getElementById('table');
-  var formElement = document.getElementById('storeform');
+  //var formElement = document.getElementById('storeform');
 
   // array for hours of day
   var hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
@@ -117,20 +117,14 @@ $(function () {
     trEl.append(thElDailyLocationTotal);
   }
 
-  // event handler for hitting submit
-  function handleSubmit(event) {
+  $('#storeform').on('submit', function (event) {
     event.preventDefault();
-    console.log('the event.target.storename.value is ', event.target.storename.value);
     var storeNameInput = event.target.storename.value;
     var minCustomerInput = event.target.mincustomer.value;
     var maxCustomerInput = event.target.maxcustomer.value;
     var averageCookieSaleInput = event.target.averagecookies.value;
-    console.log('The store name input is ' + storeNameInput);
-    console.log('The minimum customer input is ' + minCustomerInput);
-    console.log('The maximum customer input is ' + maxCustomerInput);
-    console.log('The average cookies sales input is ' + averageCookieSaleInput);
     new CreateStore(storeNameInput, minCustomerInput, maxCustomerInput, averageCookieSaleInput);
-    tableEl.innerHTML = '';
+    $('#table').html('');
     renderHours();
     for (var i = 0; i < storesCreated.length; i++) {
       storesCreated[i].render();
@@ -138,7 +132,7 @@ $(function () {
     }
     console.log(storesCreated);
     renderFooter();
-  }
+  });
 
   new CreateStore('1st and Pike', 23, 65, 6.3);
   new CreateStore('SeaTac Airport', 3, 24, 1.2);
@@ -146,13 +140,13 @@ $(function () {
   new CreateStore('Capitol Hill', 20, 38, 2.3);
   new CreateStore('Alki', 2, 16, 4.6);
 
-  formElement.addEventListener('submit', handleSubmit);
-
   renderHours();
   for (var i = 0; i < storesCreated.length; i++) {
     storesCreated[i].render();
   }
   renderFooter();
+
+
 });
 
 
